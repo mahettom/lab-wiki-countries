@@ -1,8 +1,10 @@
+import "./App.css";
 import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import countryArray from './countries.json'
 import CountriesList from './components/CountriesList/CountriesList';
-import "./App.css";
-
+import CountryDetails from './components/CountryDetails/CountryDetails';
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   //                           STATE
@@ -12,13 +14,20 @@ function App() {
   //                        COMPORTEMENT
 
 
-
-
   //                          RENDER
   return (
 
     <div className="App">
-      <CountriesList {...{ countries, setCountries }} />
+      <Navbar />
+
+      {/* <CountriesList {...{ countries, setCountries }} /> */}
+
+      <Routes>
+        <Route path="/countries" element={<CountriesList {...{ countries, setCountries }} />}>
+          <Route path=":code" element={<CountryDetails {...{ countries }} />} />
+        </Route>
+      </Routes>
+
     </div>
 
   )
